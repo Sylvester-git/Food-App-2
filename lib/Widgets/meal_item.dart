@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_choice_app/Screens/meal_detail.dart';
 import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageurl;
   final int duration;
@@ -9,6 +11,7 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem({
+    required this.id,
     required this.title,
     required this.imageurl,
     required this.affordability,
@@ -39,12 +42,20 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  void selectmeal() {}
+  void selectmeal(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final maxhigth = MediaQuery.of(context).size.height; //737.4545454545455
+    final maxwidth = MediaQuery.of(context).size.width; //392.72727272727275
+
     return InkWell(
-      onTap: selectmeal,
+      onTap: () => selectmeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -62,20 +73,20 @@ class MealItem extends StatelessWidget {
                   ),
                   child: Image.network(
                     imageurl,
-                    height: 250,
+                    height: MediaQuery.of(context).size.height * 0.339,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
                 Positioned(
-                  bottom: 20,
-                  right: 10,
+                  bottom: MediaQuery.of(context).size.height * 0.027,
+                  right: MediaQuery.of(context).size.width * 0.0255,
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 5,
+                      horizontal: MediaQuery.of(context).size.width * 0.051,
+                      vertical: MediaQuery.of(context).size.height * 0.0068,
                     ),
-                    width: 300,
+                    width: MediaQuery.of(context).size.width * 0.764,
                     color: Colors.black45,
                     child: Text(
                       title,

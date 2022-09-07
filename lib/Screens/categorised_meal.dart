@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_choice_app/Widgets/meal_item.dart';
-import '../models/meal.dart';
+import 'package:food_choice_app/models/category.dart';
 import '../Dummy_data.dart';
 
 class CategoryDetailscreen extends StatelessWidget {
@@ -14,11 +14,13 @@ class CategoryDetailscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Using navigaton.pushnamed
+    //Using navigaton.pushnamed for passing data to this screen
     final routeargument =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final categorytitle = routeargument['title'];
     final categoryid = routeargument['id'];
+    //TODO
+    //final categoryappbarcolor = routeargument['appbarcolor'];
 //We use the where method to filter the list which uses a function to create a new list
     final categoriesdmeal = meal_data.where((meal) {
       //using the contain method to check if the meal categoryid matches the general categoryid.
@@ -31,6 +33,7 @@ class CategoryDetailscreen extends StatelessWidget {
         body: ListView.builder(
           itemBuilder: (ctx, index) {
             return MealItem(
+              id: categoriesdmeal[index].id,
               title: categoriesdmeal[index].title,
               imageurl: categoriesdmeal[index].imageurl,
               affordability: categoriesdmeal[index].affordability,
